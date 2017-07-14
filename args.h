@@ -2,23 +2,20 @@
 #define __ARGS_H
 struct opts
 {
-   /* Mandatory */
-   char *filename;
-   char *needle;
-   int needlen;
+    /* Mandatory */
+    char *filename;
+    char *needle;
+    int needlen;
 
-   /* Optional */
-   char *vstring;
-   int vlen;
-   int single;
-   
+    /* Optional */
+    char *vstring;
+    int vlen;
+    int single;
 };
 
-/* Parsed options will be here */
-extern struct opts opt;
+extern struct opts opt; //  Parsed options
 
 extern int parse_args(int argc, char **argv);
 extern void print_usage(void);
 
-
-#endif 
+#endif
