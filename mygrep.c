@@ -10,6 +10,8 @@
 
 #include "args.h"
 
+#define MAX_PARTS 16
+
 typedef struct part
 {
     char *start;
@@ -110,13 +112,11 @@ void *run_part(void *data)
     return NULL;
 }
 
-#define MAX_partS 16
-
 int main(int argc, char *argv[])
 {
     char *next, *end;
-    pthread_t threads[MAX_partS];
-    part_t part[MAX_partS];
+    pthread_t threads[MAX_PARTS];
+    part_t part[MAX_PARTS];
     int num_cpus, i;
 
     if (!parse_args(argc, argv))
@@ -136,15 +136,15 @@ int main(int argc, char *argv[])
     }
     else
     {
-        /* Keep num_cpus in range 1 - MAX_partS */
+        /* Keep num_cpus in range 1 - MAX_PARTS */
         num_cpus = (int)sysconf(_SC_NPROCESSORS_ONLN);
         if (num_cpus < 2)
         {
             num_cpus = 1;
         }
-        else if (num_cpus > MAX_partS)
+        else if (num_cpus > MAX_PARTS)
         {
-            num_cpus = MAX_partS;
+            num_cpus = MAX_PARTS;
         }
     }
 
